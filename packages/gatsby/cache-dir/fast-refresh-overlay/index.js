@@ -22,7 +22,7 @@ export default function FastRefreshOverlay(props) {
       showProblems(_, data) {
         setProblems(s =>
           s.concat({
-            type: "BUILD_ERROR",
+            type: `BUILD_ERROR`,
             error: data[0],
           })
         )
@@ -33,26 +33,26 @@ export default function FastRefreshOverlay(props) {
       },
     })
 
-    window.addEventListener("error", error => {
+    window.addEventListener(`error`, error => {
       setProblems(s =>
         s.concat({
-          type: "RUNTIME_ERROR",
+          type: `RUNTIME_ERROR`,
           error,
         })
       )
     })
 
-    window.addEventListener("unhandledrejection", error => {
+    window.addEventListener(`unhandledrejection`, error => {
       setProblems(s =>
         s.concat({
-          type: "RUNTIME_ERROR",
+          type: `RUNTIME_ERROR`,
           error: error.reason,
         })
       )
     })
 
     return () => {
-      console.log("unmounting????")
+      console.log(`unmounting????`)
     }
   }, [])
 
@@ -71,10 +71,10 @@ export default function FastRefreshOverlay(props) {
   return (
     <ErrorBoundary
       onError={error =>
-        setProblems(s => s.concat({ type: "BOUNDARY_ERROR", error }))
+        setProblems(s => s.concat({ type: `BOUNDARY_ERROR`, error }))
       }
     >
-      <div style={{ filter: hasBuildError ? "blur(10px)" : "" }}>
+      <div style={{ filter: hasBuildError ? `blur(10px)` : `` }}>
         {props.children}
       </div>
 
