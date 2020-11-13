@@ -1,15 +1,23 @@
-import React from "react"
+import React, { useEffect } from "react"
 import PropTypes from "prop-types"
 import Helmet from "react-helmet"
 import { StaticQuery, graphql } from "gatsby"
 
 function SEO({ description, lang, meta, keywords, title }) {
+  useEffect(() => {
+    console.log("calling")
+    fetch("https://www.google.com/doesnt-exist-and-uncaught", {
+      method: "POST",
+    })
+  }, [])
+
   return (
     <StaticQuery
       query={detailsQuery}
       render={data => {
         const metaDescription =
           description || data.site.siteMetadata.description
+        metaDescription.forEach(s => s)
         return (
           <Helmet
             htmlAttributes={{
